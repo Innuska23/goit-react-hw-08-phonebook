@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
-import useAuth from 'hooks/useAuth';
+import useAuth from '../hooks/UseAuth';
 
-import { ContainerNavigation } from './Navigation.styled.js';
+import { ContainerNavigation } from './Navigation.styled.jsx';
 
 export default function Navigation() {
     const { isLoggedIn } = useAuth();

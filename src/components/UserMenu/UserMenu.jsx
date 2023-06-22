@@ -1,6 +1,6 @@
-import useAuth from 'hooks/useAuth';
+import useAuth from '../hooks/UseAuth';
 
-import { ContainerUser } from './UserMenu.styled.js';
+import { ContainerUser } from './UserMenu.styled.jsx';
 
 export default function UserMenu() {
     const { user } = useAuth();

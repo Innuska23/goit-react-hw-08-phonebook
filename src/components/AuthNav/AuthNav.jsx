@@ -1,4 +1,4 @@
-import { ContainerAuthNav } from './AuthNav.styled.js';
+import { ContainerAuthNav } from './AuthNav.styled.jsx';
 import { NavLink } from 'react-router-dom';
 
 export default function AuthNav() {

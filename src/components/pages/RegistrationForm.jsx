@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { register } from 'redux/auth/authOperations';
+import { register } from '../redux/auth/AuthOperation';
 
 const styles = {
     form: {
@@ -13,7 +13,7 @@ const styles = {
     },
 };
 
-export default function RegisterForm() {
+export default function RegistrationForm() {
     const dispatch = useDispatch();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');

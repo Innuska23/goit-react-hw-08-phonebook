@@ -1,18 +1,19 @@
-import Suspense from 'react';
+import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import AppBar from 'components/AppBar/AppBar';
 
-import { ContainerLayout } from './Layout.styled';
+// import MUI from 'components/MUI';
 
-export default function Layout({ children }) {
+export default function Layout() {
     return (
-        <ContainerLayout>
-            <h1>Layout</h1>
+        <>
             <AppBar />
-            <Suspense fallback={<h1>Loading...</h1>}>
-                <Outlet />
-            </Suspense>
-        </ContainerLayout>
+            <div style={{ marginTop: '120px' }}>
+                <Suspense fallback={<h1>Loading...</h1>}>
+                    <Outlet />
+                </Suspense>
+            </div>
+        </>
     );
 }

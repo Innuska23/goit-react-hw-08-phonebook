@@ -1,8 +1,8 @@
-import useAuth from 'hooks/useAuth';
-import UserMenu from 'components/UserMenu/UserMenu.jsx';
-import AuthNav from 'components/AuthNav/AuthNav.jsx';
-import Navigation from 'components/Navigation/Navigation.jsx';
-import { Header } from './AppBar.styled.js';
+import useAuth from '../hooks/UseAuth';
+import UserMenu from '../UserMenu/UserMenu';
+import AuthNav from '../AuthNav/AuthNav.jsx';
+import Navigation from '../Navigation/Navigation.jsx';
+import { Header } from './AppBar.styled';
 
 export default function AppBar() {
     <Navigation />;

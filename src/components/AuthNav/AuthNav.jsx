@@ -5,6 +5,9 @@ export default function AuthNav() {
     return (
         <ContainerAuthNav>
             <li>
+                <NavLink to="/Home">Home</NavLink>
+            </li>
+            <li>
                 <NavLink to="/register">Register</NavLink>
             </li>
             <li>

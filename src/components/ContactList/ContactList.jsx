@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { Button, List, ListItem } from './ContactList.styled';
 import { deleteContact } from '../redux/operations';
 
+
 function ContactList() {
     const dispatch = useDispatch();
     const onDelete = (id) => {
@@ -20,8 +21,7 @@ function ContactList() {
     // );
     // eslint-disable-next-line
     const visibleContacts = useSelector(selectVisibleContacts);
-
-    return (
+  return (
         <List>
             {visibleContacts.map(({ id, name, number }, idx) => (
                 <ListItem key={id}>

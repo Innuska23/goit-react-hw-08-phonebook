@@ -41,7 +41,7 @@ export default function Login() {
     <PagesStyle>
       <Labelh1>Page of LogIn</Labelh1>
 
-      <form onSubmit={handleSubmit} style={styles.form} autoComplete="off">
+      <form onSubmit={handleSubmit} autoComplete="off">
         <label style={styles.label}>
           <input
             label="Email"
@@ -66,9 +66,9 @@ export default function Login() {
           />
         </label>
 
-        {/* <MUI.Button variant="contained" type="submit" color="success">
+        <button type='summit'>
           LogIn
-        </MUI.Button> */}
+        </button>
       </form>
     </PagesStyle>
   );

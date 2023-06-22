@@ -6,39 +6,54 @@ export const FormContact = styled(Form)`
     flex-flow: column wrap;
     gap: 25px;
     font-size: 22px;
-    max-width: 450px`;
+    ${'' /* max-width: 450px */}
+`;
 
 export const LabelForm = styled.label`
-    color: #333340;
-    background: #ffffff;
     font-weight: 500;`;
 
 export const InputForm = styled(Field)`
-    display: inline-block;
-    font-size: 22px;
-    background: #EDF2F7;
-    border-color: green;
-    outline: none;
-    border-radius: 6px;
-    height: 38px;
-    &:hover {
-        box-shadow: 0px 0px 30px 0px rgba(21,115,71,1)
-    `;
+        box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 6px 12px;
+    gap: 4px;
+    width: 100%;
+    height: 32px;
+    background: #455A64;
+    border: none;
+    color: #fff;
+    outline-with: 1.75;
+    outline-color: #455A64;
+
+    outline-style: solid;
+    border-radius: 4px;
+    &:hover,
+    &:focus,
+    &:focus-visible {
+        outline-color: #FED36A;
+        border: none;
+    }
+`;
 
 export const ButtonForm = styled.button`
     padding: 5px 20px;
-    color: white;
+    color: black;
+    width: 200px;
     height: 48px;
     border-radius: 12px;
-    background-color: #198754;
+    background-color: #fed36a;
     cursor: pointer;
     font-size: 24px;
     outline: none;
     border: 1px solid;
     &:hover {
-    background-color: #157347;
+    background-color: white;
     border: none;
-    box-shadow: 0px 0px 30px 0px rgba(21,115,71,1);
+    -webkit-box-shadow: inset 10px 10px 56px -8px rgba(69,90,100,0.55);
+    -moz-box-shadow: inset 10px 10px 56px -8px rgba(69,90,100,0.55);
+    box-shadow: inset 10px 10px 56px -8px rgba(69,90,100,0.55);
     }
 `;
 

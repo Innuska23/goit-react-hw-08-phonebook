@@ -1,16 +1,27 @@
-import AppBar from 'components/AppBar/AppBar';
+// import AppBar from 'components/AppBar/AppBar';
 import ContactForm from 'components/ContactForm/ContactForm';
 import ContactList from 'components/ContactList/ContactList';
 import Filter from 'components/Filter/Filter';
-import { Labelh1, PagesStyle } from './pages.styled';
+import { Labelh1, Labelh2, PagesStyle } from './pages.styled';
+import { useEffect } from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchContacts } from '../redux/operations';
+import { selectIsLoading } from '../redux/selectors';
 
 export default function Contacts() {
+    const dispatch = useDispatch();
+    const isLoading = useSelector(selectIsLoading);
+    useEffect(() => {
+        dispatch(fetchContacts());
+    }, [dispatch]);
     return (
         <PagesStyle>
-            <AppBar />
+            {/* <AppBar /> */}
             <Labelh1>Phonebook</Labelh1>
             <ContactForm />
-            <h2>Contacts</h2>
+            {isLoading && <p>Loading...</p>}
+            <Labelh2>Contacts</Labelh2>
             <Filter />
             <ContactList />
         </PagesStyle>

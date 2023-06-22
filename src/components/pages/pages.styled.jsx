@@ -13,3 +13,8 @@ export const Labelh1 = styled.h1`
     margin-bottom: 20px;
     text-transform: uppercase
 `;
+
+export const Labelh2 = styled.h2`
+    margin-top: 20px;
+    margin-bottom: 20px;
+`;

@@ -1,7 +1,5 @@
 import { useSelector } from 'react-redux';
-// import { selectContacts, selectFilter } from '../redux/selectors';
 import { selectVisibleContacts } from '../redux/selectors';
-import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 
 import { Button, List, ListItem } from './ContactList.styled';
@@ -14,14 +12,8 @@ function ContactList() {
         dispatch(deleteContact(id));
     };
 
-    // const contacts = useSelector(selectContacts);
-    // const filter = useSelector(selectFilter);
-    // const filterContacts = contacts.filter(({ name }) =>
-    //     name.toLowerCase().includes(filter)
-    // );
-    // eslint-disable-next-line
     const visibleContacts = useSelector(selectVisibleContacts);
-  return (
+    return (
         <List>
             {visibleContacts.map(({ id, name, number }, idx) => (
                 <ListItem key={id}>
@@ -32,10 +24,5 @@ function ContactList() {
         </List>
     );
 }
-
-ContactList.propTypes = {
-    name: PropTypes.string.isRequired,
-    number: PropTypes.string.isRequired,
-};
 
 export default ContactList;

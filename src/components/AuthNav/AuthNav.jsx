@@ -1,18 +1,13 @@
-import { ContainerAuthNav } from './AuthNav.styled.jsx';
-import { NavLink } from 'react-router-dom';
+import { ContainerAuthNav, NavLinkStyled } from './AuthNav.styled.jsx';
 
 export default function AuthNav() {
     return (
         <ContainerAuthNav>
-            <li>
-                <NavLink to="/Home">Home</NavLink>
-            </li>
-            <li>
-                <NavLink to="/register">Register</NavLink>
-            </li>
-            <li>
-                <NavLink to="/login">Logi In</NavLink>
-            </li>
+            <NavLinkStyled to="/">Home</NavLinkStyled>
+            <div>
+                <NavLinkStyled to="/register">Register</NavLinkStyled>
+                <NavLinkStyled to="/login">Logi In</NavLinkStyled>
+            </div>
         </ContainerAuthNav>
     );
 }

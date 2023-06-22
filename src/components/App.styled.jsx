@@ -8,7 +8,6 @@ export const Container = styled.div`
     padding-right: 15px;
     padding-top: 20px;
     padding-bottom: 20px;
-    width: 100%;
 `;
 
 export const MessageText = styled.p`

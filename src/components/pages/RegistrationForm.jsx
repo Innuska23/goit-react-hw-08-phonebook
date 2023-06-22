@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { register } from '../redux/auth/AuthOperation';
+import { PagesStyle } from './pages.styled';
 
 const styles = {
     form: {
@@ -41,7 +42,7 @@ export default function RegistrationForm() {
     };
 
     return (
-        <div>
+        <PagesStyle>
             <h1>Page of registration</h1>
 
             <form onSubmit={handleSubmit} style={styles.form} autoComplete="off">
@@ -72,6 +73,6 @@ export default function RegistrationForm() {
 
                 <button type="submit">Register</button>
             </form>
-        </div>
+        </PagesStyle>
     );
 }

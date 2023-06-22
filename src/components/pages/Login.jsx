@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { logIn } from '../redux/auth/AuthOperation';
+import { Labelh1, PagesStyle } from './pages.styled';
 
 const styles = {
   form: {
@@ -37,8 +38,8 @@ export default function Login() {
   };
 
   return (
-    <div>
-      <h1>Page of LogIn</h1>
+    <PagesStyle>
+      <Labelh1>Page of LogIn</Labelh1>
 
       <form onSubmit={handleSubmit} style={styles.form} autoComplete="off">
         <label style={styles.label}>
@@ -69,6 +70,6 @@ export default function Login() {
           LogIn
         </MUI.Button> */}
       </form>
-    </div>
+    </PagesStyle>
   );
 }

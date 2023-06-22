@@ -9,7 +9,7 @@ export default function Layout() {
     return (
         <>
             <AppBar />
-            <div style={{ marginTop: '120px' }}>
+            <div style={{ marginTop: '60px', justifyContent: "center", alignItems: "center", display: "flex" }}>
                 <Suspense fallback={<h1>Loading...</h1>}>
                     <Outlet />
                 </Suspense>

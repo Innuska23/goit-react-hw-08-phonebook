@@ -1,18 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { logIn } from '../redux/auth/AuthOperation';
-import { Labelh1, PagesStyle } from './pages.styled';
-
-const styles = {
-  form: {
-    width: 320,
-  },
-  label: {
-    display: 'flex',
-    flexDirection: 'column',
-    marginBottom: 50,
-  },
-};
+import { ButtonAuth, FormRegister, InputAuth, LabelAuth, PagesStyle, TitleAuth } from './pages.styled';
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -39,37 +28,39 @@ export default function Login() {
 
   return (
     <PagesStyle>
-      <Labelh1>Page of LogIn</Labelh1>
+      <TitleAuth>Page of LogIn</TitleAuth>
 
-      <form onSubmit={handleSubmit} autoComplete="off">
-        <label style={styles.label}>
-          <input
-            label="Email"
-            helperText="Please enter your email"
-            focused
-            type="email"
-            name="email"
-            value={email}
-            onChange={handleChange}
-          />
-        </label>
+      <FormRegister onSubmit={handleSubmit} autoComplete="off">
+        <LabelAuth>
+          Email
+        </LabelAuth>
+        <InputAuth
+          label="Email"
+          helperText="Please enter your email"
+          focused
+          type="email"
+          name="email"
+          value={email}
+          onChange={handleChange}
+        />
 
-        <label >
-          <input
-            label="Password"
-            focused
-            helperText="Please enter your password"
-            type="password"
-            name="password"
-            value={password}
-            onChange={handleChange}
-          />
-        </label>
+        <LabelAuth >
+          Password
+        </LabelAuth>
+        <InputAuth
+          label="Password"
+          focused
+          helperText="Please enter your password"
+          type="password"
+          name="password"
+          value={password}
+          onChange={handleChange}
+        />
 
-        <button type='summit'>
+        <ButtonAuth type='summit'>
           LogIn
-        </button>
-      </form>
+        </ButtonAuth>
+      </FormRegister>
     </PagesStyle>
   );
 }

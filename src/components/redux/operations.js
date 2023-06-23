@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { BASE_URL } from '../Constants/constant';
+import { BASE_URL } from 'constans';
 
 axios.defaults.baseURL = BASE_URL;
 

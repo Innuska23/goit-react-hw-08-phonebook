@@ -1,18 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { register } from '../redux/auth/AuthOperation';
-import { PagesStyle } from './pages.styled';
-
-const styles = {
-    form: {
-        width: 320,
-    },
-    label: {
-        display: 'flex',
-        flexDirection: 'column',
-        marginBottom: 15,
-    },
-};
+import { ButtonAuth, FormRegister, InputAuth, LabelAuth, PagesStyle, TitleAuth } from './pages.styled';
 
 export default function RegistrationForm() {
     const dispatch = useDispatch();
@@ -43,36 +32,40 @@ export default function RegistrationForm() {
 
     return (
         <PagesStyle>
-            <h1>Page of registration</h1>
+            <TitleAuth>Page of registration</TitleAuth>
 
-            <form onSubmit={handleSubmit} style={styles.form} autoComplete="off">
-                <label style={styles.label}>
+
+            <FormRegister onSubmit={handleSubmit} autoComplete="off">
+                <LabelAuth>
                     Name
-                    <input type="text" name="name" value={name} onChange={handleChange} />
-                </label>
+                </LabelAuth>
+                <InputAuth type="text" name="name" value={name} onChange={handleChange} autoComplete="off" />
 
-                <label style={styles.label}>
+
+                <LabelAuth>
                     Email
-                    <input
-                        type="email"
-                        name="email"
-                        value={email}
-                        onChange={handleChange}
-                    />
-                </label>
+                </LabelAuth>
+                <InputAuth
+                    type="email"
+                    name="email"
+                    value={email}
+                    onChange={handleChange}
+                    autoComplete=""
+                />
 
-                <label style={styles.label}>
+                <LabelAuth>
                     Password
-                    <input
-                        type="password"
-                        name="password"
-                        value={password}
-                        onChange={handleChange}
-                    />
-                </label>
+                </LabelAuth>
+                <InputAuth
+                    type="password"
+                    name="password"
+                    value={password}
+                    onChange={handleChange}
+                    autoComplete="off"
+                />
 
-                <button type="submit">Register</button>
-            </form>
+                <ButtonAuth type="submit">Register</ButtonAuth>
+            </FormRegister>
         </PagesStyle>
     );
 }

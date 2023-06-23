@@ -10,6 +10,9 @@ export const WrapHeader = styled.header`
     box-shadow: 0px 11px 15px -8px rgba(66, 68, 90, 1);
 `;
 
+export const WrapperAuthNav = styled.div`
+`;
+
 export const ContainerAuthNav = styled.ul`
     display: flex;
     width: 100%;

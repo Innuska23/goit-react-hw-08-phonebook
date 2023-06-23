@@ -1,13 +1,13 @@
-import { ContainerAuthNav, NavLinkStyled } from './AuthNav.styled.jsx';
+import { ContainerAuthNav, NavLinkStyled, WrapperAuthNav } from './AuthNav.styled.jsx';
 
 export default function AuthNav() {
     return (
         <ContainerAuthNav>
             <NavLinkStyled to="/">Home</NavLinkStyled>
-            <div>
+            <WrapperAuthNav>
                 <NavLinkStyled to="/register">Register</NavLinkStyled>
                 <NavLinkStyled to="/login">Logi In</NavLinkStyled>
-            </div>
+            </WrapperAuthNav>
         </ContainerAuthNav>
     );
 }

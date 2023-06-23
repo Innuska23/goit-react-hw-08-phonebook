@@ -6,14 +6,13 @@ export const FormContact = styled(Form)`
     flex-flow: column wrap;
     gap: 25px;
     font-size: 22px;
-    ${'' /* max-width: 450px */}
 `;
 
 export const LabelForm = styled.label`
     font-weight: 500;`;
 
 export const InputForm = styled(Field)`
-        box-sizing: border-box;
+    box-sizing: border-box;
     display: flex;
     flex-direction: row;
     align-items: center;

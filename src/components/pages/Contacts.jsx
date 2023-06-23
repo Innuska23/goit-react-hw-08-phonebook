@@ -1,4 +1,3 @@
-// import AppBar from 'components/AppBar/AppBar';
 import ContactForm from 'components/ContactForm/ContactForm';
 import ContactList from 'components/ContactList/ContactList';
 import Filter from 'components/Filter/Filter';
@@ -17,7 +16,6 @@ export default function Contacts() {
     }, [dispatch]);
     return (
         <PagesStyle>
-            {/* <AppBar /> */}
             <Labelh1>Phonebook</Labelh1>
             <ContactForm />
             {isLoading && <p>Loading...</p>}

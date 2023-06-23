@@ -12,7 +12,7 @@ import PrivateRoute from './PrivateRoute';
 
 import useAuth from './hooks/UseAuth';
 import { Container } from './App.styled';
-// import RegistrationForm from './pages/RegistrationForm';
+
 const Home = lazy(() => import('./pages/Home'));
 const RegistrationForm = lazy(() => import('./pages/RegistrationForm'));
 const Contacts = lazy(() => import('./pages/Contacts'));

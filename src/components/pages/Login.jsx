@@ -2,6 +2,19 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { logIn } from '../redux/auth/AuthOperation';
 import { ButtonAuth, FormRegister, InputAuth, LabelAuth, PagesStyle, TitleAuth } from './pages.styled';
+import * as yup from 'yup'
+import { Formik } from 'formik';
+
+
+const SignupSchema = yup.object().shape({
+  name: yup.string()
+    .min(2, 'Too Short!')
+    .max(70, 'Too Long!')
+    .required('Required'),
+  email: yup.string()
+    .email('Invalid email')
+    .required('Required'),
+});
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -19,7 +32,7 @@ export default function Login() {
     }
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (values) => {
     e.preventDefault();
     dispatch(logIn({ email, password }));
     setEmail('');
@@ -30,7 +43,7 @@ export default function Login() {
     <PagesStyle>
       <TitleAuth>Page of LogIn</TitleAuth>
 
-      <FormRegister onSubmit={handleSubmit} autoComplete="off">
+      <Formik onSubmit={handleSubmit} autoComplete="off">
         <LabelAuth>
           Email
         </LabelAuth>
@@ -60,7 +73,7 @@ export default function Login() {
         <ButtonAuth type='summit'>
           LogIn
         </ButtonAuth>
-      </FormRegister>
+      </Formik>
     </PagesStyle>
   );
 }

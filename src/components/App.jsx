@@ -11,7 +11,8 @@ import RestrictedRoute from './RestrictedRoute';
 import PrivateRoute from './PrivateRoute';
 
 import useAuth from './hooks/UseAuth';
-import { Container } from './App.styled';
+import { Box, Container } from '@chakra-ui/react';
+import AppBar from './AppBar/AppBar';
 
 const Home = lazy(() => import('./pages/Home'));
 const RegistrationForm = lazy(() => import('./pages/RegistrationForm'));
@@ -27,38 +28,45 @@ function App() {
   const { isRefreshing } = useAuth();
 
   return (
-
     !isRefreshing && (
-      <Container>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route
-              path="/register"
-              element={
-                <RestrictedRoute
-                  component={<RegistrationForm />}
-                  redirectTo="/contacts"
-                />
-              }
-            />
+      <Container maxW='2lg' centerContent>
 
-            <Route
-              path="/login"
-              element={
-                <RestrictedRoute component={<Login />} redirectTo="/contacts" />
-              }
-            />
-            <Route
-              path="/contacts"
-              element={
-                <PrivateRoute component={<Contacts />} redirectTo="/login" />
-              }
-            />
-            <Route path="*" element={<Home />} />
-          </Route>
-        </Routes>
-      </Container>
+
+        <Box padding='4' width="100%">
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+
+              <Route
+                path="/register"
+                element={
+                  <RestrictedRoute
+                    component={<RegistrationForm />}
+                    redirectTo="/contacts"
+                  />
+                }
+              />
+
+              <Route
+                path="/login"
+                element={
+                  <RestrictedRoute component={<Login />} redirectTo="/contacts" />
+                }
+              />
+
+              <Route
+                path="/contacts"
+                element={
+                  <PrivateRoute component={<Contacts />} redirectTo="/login" />
+                }
+              />
+
+              <Route path="*" element={<Home />} />
+            </Route>
+          </Routes>
+        </Box>
+
+      </Container >
     )
   );
 }

@@ -1,5 +1,5 @@
-import useAuth from '../hooks/UseAuth';
-import { logOut } from '../redux/auth/AuthOperation';
+import useAuth from '../../../hooks/UseAuth';
+import { logOut } from '../../../redux/auth/AuthOperation';
 import { useDispatch } from 'react-redux';
 
 import { ContainerUser, ButtonLogIn, UserText } from './UserMenu.styled.jsx';

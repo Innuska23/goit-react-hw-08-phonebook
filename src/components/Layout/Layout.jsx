@@ -1,19 +1,21 @@
+import { Box, Flex, Spinner } from '@chakra-ui/react';
+import AppBar from 'components/AppBar/AppBar';
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-
-import AppBar from 'components/AppBar/AppBar';
-import { ContainerLayout } from './Layout.styled';
-
 
 export default function Layout() {
     return (
         <>
-            <AppBar />
-            <ContainerLayout>
-                <Suspense fallback={<h1>Loading...</h1>}>
+            <Box padding='4' width="100%">
+                <AppBar />
+            </Box>
+
+            <Box padding='4' width="100%">
+                <Suspense fallback={<Flex justifyContent='center' width="100%"><Spinner /></Flex>}>
                     <Outlet />
                 </Suspense>
-            </ContainerLayout>
+            </Box>
         </>
+
     );
 }

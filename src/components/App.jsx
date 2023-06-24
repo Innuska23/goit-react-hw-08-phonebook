@@ -29,9 +29,7 @@ function App() {
 
   return (
     !isRefreshing && (
-      <Container maxW='2lg' centerContent>
-
-
+      <Container maxW='1200px' centerContent>
         <Box padding='4' width="100%">
           <Routes>
             <Route path="/" element={<Layout />}>

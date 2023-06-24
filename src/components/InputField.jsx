@@ -1,5 +1,6 @@
 import {
     FormControl,
+    FormErrorMessage,
     FormLabel,
     IconButton,
     Input,
@@ -8,12 +9,16 @@ import {
     useDisclosure,
     useMergeRefs,
 } from '@chakra-ui/react'
+import { useField } from 'formik';
 import { forwardRef, useRef } from 'react'
 import { HiEye, HiEyeOff } from 'react-icons/hi'
 
-export const PasswordField = forwardRef((props, ref) => {
+export const InputField = forwardRef((props, ref) => {
+    const { type, name, label } = props;
+    const isPassword = type === 'password'
 
-    const { isOpen, onToggle } = useDisclosure()
+    const [field, meta] = useField(props);
+    const { isOpen, onToggle } = useDisclosure({ defaultIsOpen: !isPassword })
     const inputRef = useRef(null)
 
     const mergeRef = useMergeRefs(inputRef, ref)
@@ -23,31 +28,30 @@ export const PasswordField = forwardRef((props, ref) => {
             inputRef.current.focus({ preventScroll: true })
         }
     }
-
     return (
-        <FormControl>
-            <FormLabel htmlFor="password">Password</FormLabel>
+        <FormControl isInvalid={meta.error}>
+            <FormLabel htmlFor={name}>{label}</FormLabel>
             <InputGroup>
-                <InputRightElement>
+                {isPassword && <InputRightElement>
                     <IconButton
                         variant="text"
                         aria-label={isOpen ? 'Mask password' : 'Reveal password'}
                         icon={isOpen ? <HiEyeOff /> : <HiEye />}
                         onClick={onClickReveal}
                     />
-                </InputRightElement>
+                </InputRightElement>}
+
                 <Input
-                    id="password"
                     ref={mergeRef}
-                    name="password"
-                    type={isOpen ? 'text' : 'password'}
-                    autoComplete="current-password"
-                    required
+                    {...field}
                     {...props}
+                    type={isOpen ? 'text' : 'password'}
                 />
             </InputGroup>
+
+            {meta.error && <FormErrorMessage>{meta.error}</FormErrorMessage>}
         </FormControl>
     )
 })
 
-PasswordField.displayName = 'PasswordField'
+InputField.displayName = 'InputField'

@@ -1,71 +1,70 @@
-import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { register } from '../redux/auth/AuthOperation';
-import { ButtonAuth, FormRegister, InputAuth, LabelAuth, PagesStyle, TitleAuth } from './pages.styled';
+import * as yup from 'yup'
+import { Button, Flex, Spinner, Text } from '@chakra-ui/react';
+import { Form, Formik } from 'formik';
+import { InputField } from 'components/InputField';
 
-export default function RegistrationForm() {
+const SignupSchema = yup.object().shape({
+    name: yup.string().min(2, 'Too Short!')
+        .max(50, 'Too Long!')
+        .required('Required'),
+    email: yup.string()
+        .email('Invalid email')
+        .required('Required'),
+    password: yup.string()
+        .min(8, 'Too Short!')
+        .max(15, 'Too Long!')
+        .required('Required'),
+});
+
+const initialFormValues = {
+    email: "", password: "", name: '',
+}
+
+export default function Login() {
     const dispatch = useDispatch();
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
 
-    const handleChange = ({ target: { name, value } }) => {
-        switch (name) {
-            case 'name':
-                return setName(value);
-            case 'email':
-                return setEmail(value);
-            case 'password':
-                return setPassword(value);
-            default:
-                return;
-        }
-    };
-
-    const handleSubmit = e => {
-        e.preventDefault();
-        dispatch(register({ name, email, password }));
-        setName('');
-        setEmail('');
-        setPassword('');
+    const handleSubmit = async ({ email, password, name }) => {
+        await dispatch(register({ email, password, name })).unwrap();
     };
 
     return (
-        <PagesStyle>
-            <TitleAuth>Page of registration</TitleAuth>
+        <Flex maxWidth='100%' flexDirection='column' alignItems='center' >
+            <Formik onSubmit={handleSubmit}
+                initialValues={initialFormValues}
+                validationSchema={SignupSchema} autoComplete="off">
+                {({ isSubmitting }) => (<Form>
+                    <Flex width='600px' flexDirection='column' gap={6}>
+                        <Text fontSize='2xl'>Page of registration</Text>
 
+                        <InputField
+                            label="Email"
+                            placeholder="Please enter your email"
+                            type="email"
+                            name="email"
+                        />
 
-            <FormRegister onSubmit={handleSubmit} autoComplete="off">
-                <LabelAuth>
-                    Name
-                </LabelAuth>
-                <InputAuth type="text" name="name" value={name} onChange={handleChange} autoComplete="off" />
+                        <InputField
+                            label="Name"
+                            placeholder="Please enter your name"
+                            type="name"
+                            name="name"
+                        />
 
+                        <InputField
+                            label="Password"
+                            placeholder="Please enter your password"
+                            type="password"
+                            name="password"
+                        />
 
-                <LabelAuth>
-                    Email
-                </LabelAuth>
-                <InputAuth
-                    type="email"
-                    name="email"
-                    value={email}
-                    onChange={handleChange}
-                    autoComplete=""
-                />
-
-                <LabelAuth>
-                    Password
-                </LabelAuth>
-                <InputAuth
-                    type="password"
-                    name="password"
-                    value={password}
-                    onChange={handleChange}
-                    autoComplete="off"
-                />
-
-                <ButtonAuth type="submit">Register</ButtonAuth>
-            </FormRegister>
-        </PagesStyle>
+                        <Button width='xs' type='summit' disabled={isSubmitting}>
+                            {isSubmitting ? <Spinner /> : <Text>Register</Text>}
+                        </Button>
+                    </Flex>
+                </Form>)}
+            </Formik>
+        </Flex>
     );
 }

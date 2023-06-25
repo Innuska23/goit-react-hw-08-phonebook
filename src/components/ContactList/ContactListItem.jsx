@@ -11,7 +11,7 @@ const HighlightText = ({ highlightText, name }) => {
     const highlightText2 = name.slice(indexSubstr, indexSubstr + highlightText.length)
     const highlightText3 = name.slice(indexSubstr + highlightText.length)
 
-    return <Text >{highlightText1}<Text as='span' fontWeight='bold'>{highlightText2}</Text>{highlightText3}</Text>
+    return <Text as='span'>{highlightText1}<Text as='span' fontWeight='bold'>{highlightText2}</Text>{highlightText3}</Text>
 }
 
 const ContactListItem = ({ item, onDelete }) => {
@@ -26,9 +26,9 @@ const ContactListItem = ({ item, onDelete }) => {
     return <ListItem marginBlock={6}>
         <Flex width="100%" justifyContent='space-between' alignItems='center'>
             <Box>
-                {!filter && <Text>{item.name} {item.number}</Text>}
+                <Text>
+                    {!!filter ? <HighlightText highlightText={filter} name={item.name} /> : item.name}  {item.number}</Text>
 
-                {!!filter && <HighlightText highlightText={filter} name={item.name} />}
             </Box>
 
             <Button isLoading={isLoading} colorScheme='red' onClick={handleDeleteClick} size="sm">

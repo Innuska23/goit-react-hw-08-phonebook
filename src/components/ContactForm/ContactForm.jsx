@@ -1,15 +1,25 @@
 import { nanoid } from '@reduxjs/toolkit';
-import { Formik } from 'formik';
+import { Form, Formik } from 'formik';
 import * as yup from 'yup';
-import { FormContact, Error, InputForm, LabelForm, ButtonForm } from './ContactForm.styled';
-
 import { useDispatch, useSelector } from 'react-redux';
+import { Button, Flex, Spinner, Text } from '@chakra-ui/react';
+
 import { addContact } from '../redux/operations';
 import { selectContacts } from '../redux/selectors';
+import { InputField } from 'components/InputField';
 
-const schema = yup.object().shape({
-  name: yup.string().required(),
-  number: yup.string().required(),
+const ContactSchema = yup.object().shape({
+  name: yup
+    .string()
+    .trim()
+    .required()
+    .matches(/^[a-zA-Za-яА-Я]+(([' -][a-zA-Za-яА-Я ])?[a-zA-Za-яА-Я]*)*$/g, 'Should be name'),
+  number: yup
+    .string()
+    .trim()
+    .required()
+    .matches(/\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/g, 'Should be phone number'),
+
 });
 
 const initialValues = {
@@ -17,67 +27,58 @@ const initialValues = {
   number: '',
 };
 
-const nameInputId = nanoid();
-const numberInputId = nanoid();
-
 const ContactForm = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
-  const handleSubmit = (e, { resetForm }) => {
 
-    const name = e.name.trim();
-    if (contacts.find(el => el.name.toLowerCase() === name.toLowerCase())) {
-      alert(`${name} is already in contacts`);
-      resetForm();
+  const handleSubmit = async ({ name, number }, actions) => {
+    if (contacts.find(existContact => existContact.name.toLowerCase() === name.toLowerCase())) {
+      await actions.setFieldError('name', `${name} is already in contacts`)
       return;
     }
-    const number = e.number;
+
     const newContact = {
       id: nanoid(),
       name,
       number,
     };
-    dispatch(addContact(newContact));
-    resetForm();
+    await dispatch(addContact(newContact)).unwrap();
+    actions.resetForm()
   };
 
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={handleSubmit}
-      validationSchema={schema}
-    >
-      <FormContact autoComplete="off">
-        <LabelForm htmlFor={nameInputId}>
-          Name
-        </LabelForm>
-        <InputForm
-          id={nameInputId}
-          type="text"
-          name="name"
-          pattern="^[a-zA-Za-яА-Я]+(([' -][a-zA-Za-яА-Я ])?[a-zA-Za-яА-Я]*)*$"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          required
-        />
-        <Error name="name" component="div" />
+    <Flex maxWidth='100%' flexDirection='column' alignItems='center' >
+      <Formik
+        onSubmit={handleSubmit}
+        initialValues={initialValues}
+        validationSchema={ContactSchema}
+        autoComplete="off"
+      >
+        {({ isSubmitting, isValidating }) => (<Form>
+          <Flex width='600px' flexDirection='column' gap={6}>
+            <Text fontSize='2xl'>New phone</Text>
 
-        <LabelForm htmlFor={numberInputId}>
-          <span>Number</span>
-        </LabelForm>
-        <InputForm
-          id={numberInputId}
-          type="tel"
-          name="number"
-          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          required
-        />
-        <Error name="number" component="div" />
+            <InputField
+              label="Name"
+              placeholder="Please enter your name"
+              type="name"
+              name="name"
+            />
 
-        <ButtonForm type="submit">Add contact</ButtonForm>
-      </FormContact>
-    </Formik>
-  );
+            <InputField
+              label="Number"
+              placeholder="Please enter your number"
+              type="tel"
+              name="number"
+            />
+
+            <Button width='xs' type='summit' disabled={isSubmitting}>
+              {isSubmitting || isValidating ? <Spinner /> : <Text>Add new contact</Text>}
+            </Button>
+          </Flex>
+        </Form>)}
+      </Formik>
+    </Flex>)
 }
 
 export default ContactForm;

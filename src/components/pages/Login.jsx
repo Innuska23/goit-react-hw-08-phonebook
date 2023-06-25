@@ -1,10 +1,11 @@
 
 import { useDispatch } from 'react-redux';
-import { logIn } from '../redux/auth/AuthOperation';
 import * as yup from 'yup'
 import { Form, Formik } from 'formik';
 import { InputField } from 'components/InputField';
-import { Button, Flex, Spinner, Text } from '@chakra-ui/react';
+import { Button, Flex, Text } from '@chakra-ui/react';
+
+import { logIn } from '../redux/auth/AuthOperation';
 
 const SignupSchema = yup.object().shape({
   email: yup.string()
@@ -50,8 +51,8 @@ export default function Login() {
               name="password"
             />
 
-            <Button width='xs' type='summit' disabled={isSubmitting}>
-              {isSubmitting ? <Spinner /> : <Text>LogIn</Text>}
+            <Button width='xs' type='summit' isLoading={isSubmitting} disabled={isSubmitting}>
+              <Text>Login</Text>
             </Button>
           </Flex>
         </Form>)}

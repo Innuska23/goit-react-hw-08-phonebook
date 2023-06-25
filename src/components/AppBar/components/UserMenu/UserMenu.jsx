@@ -1,20 +1,23 @@
-import useAuth from '../../../hooks/UseAuth';
-import { logOut } from '../../../redux/auth/AuthOperation';
+import { Box, Button, Text } from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
 
-import { ContainerUser, ButtonLogIn, UserText } from './UserMenu.styled.jsx';
+import useAuth from '../../../hooks/UseAuth';
+import { logOut } from '../../../redux/auth/AuthOperation';
 
 export default function UserMenu() {
     const dispatch = useDispatch();
     const { user } = useAuth();
+
     return (
-        <ContainerUser>
-            <UserText>Hi, {user.name} !</UserText>
-            <UserText>Email: {user.email}</UserText>
-            <ButtonLogIn type="button" onClick={() => dispatch(logOut())}>
-                Log Out
-            </ButtonLogIn>
-        </ContainerUser>
+        <>
+            <Box>
+                <Text>Hi, {user.name}!</Text>
+                <Text>Email: {user.email}</Text>
+            </Box>
+            <Button type="button" colorScheme='gray' onClick={() => dispatch(logOut())}>
+                Logout
+            </Button>
+        </>
     );
 }
 

@@ -1,27 +1,33 @@
 import ContactForm from 'components/ContactForm/ContactForm';
 import ContactList from 'components/ContactList/ContactList';
 import Filter from 'components/Filter/Filter';
-import { Labelh1, Labelh2, PagesStyle } from './pages.styled';
 import { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchContacts } from '../redux/operations';
 import { selectIsLoading } from '../redux/selectors';
+import { Box, Spinner, Text } from '@chakra-ui/react';
 
 export default function Contacts() {
     const dispatch = useDispatch();
     const isLoading = useSelector(selectIsLoading);
+
     useEffect(() => {
         dispatch(fetchContacts());
     }, [dispatch]);
+
+
     return (
-        <PagesStyle>
-            <Labelh1>Phonebook</Labelh1>
+        <Box width='100%'>
+            <Text fontSize='4xl' fontWeight='bold'>Phonebook</Text>
+
             <ContactForm />
-            {isLoading && <p>Loading...</p>}
-            <Labelh2>Contacts</Labelh2>
+
+            <Text fontSize='4xl' marginTop={12} >Contacts</Text>
+
             <Filter />
-            <ContactList />
-        </PagesStyle>
+
+            {isLoading ? <Spinner /> : <ContactList />}
+        </Box>
     );
 }

@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { lazy } from 'react';
 
 import Layout from 'components/Layout/Layout';
@@ -7,15 +7,13 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchCurrentUser } from './redux/auth/AuthOperation';
 
-import RestrictedRoute from './RestrictedRoute';
 import PrivateRoute from './PrivateRoute';
 
 import useAuth from './hooks/UseAuth';
 import { Box, Container } from '@chakra-ui/react';
-import AppBar from './AppBar/AppBar';
+import PublicRoute from './PublicRoute';
 
-const Home = lazy(() => import('./pages/Home'));
-const RegistrationForm = lazy(() => import('./pages/RegistrationForm'));
+const RegistrationForm = lazy(() => import('./pages/Registration'));
 const Contacts = lazy(() => import('./pages/Contacts'));
 const Login = lazy(() => import('./pages/Login'));
 
@@ -33,12 +31,12 @@ function App() {
         <Box padding='4' width="100%">
           <Routes>
             <Route path="/" element={<Layout />}>
-              <Route index element={<Home />} />
+              <Route index element={<Navigate to='/contacts' replace />} />
 
               <Route
                 path="/register"
                 element={
-                  <RestrictedRoute
+                  <PublicRoute
                     component={<RegistrationForm />}
                     redirectTo="/contacts"
                   />
@@ -48,7 +46,7 @@ function App() {
               <Route
                 path="/login"
                 element={
-                  <RestrictedRoute component={<Login />} redirectTo="/contacts" />
+                  <PublicRoute component={<Login />} redirectTo="/contacts" />
                 }
               />
 
@@ -59,7 +57,7 @@ function App() {
                 }
               />
 
-              <Route path="*" element={<Home />} />
+              <Route path="*" element={<Contacts />} />
             </Route>
           </Routes>
         </Box>

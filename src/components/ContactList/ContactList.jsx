@@ -1,27 +1,24 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { OrderedList } from '@chakra-ui/react';
+
 import { selectVisibleContacts } from '../redux/selectors';
-import { useDispatch } from 'react-redux';
-
-import { Button, List, ListItem } from './ContactList.styled';
 import { deleteContact } from '../redux/operations';
-
+import ContactListItem from './ContactListItem';
 
 function ContactList() {
     const dispatch = useDispatch();
-    const onDelete = (id) => {
-        dispatch(deleteContact(id));
+    const visibleContacts = useSelector(selectVisibleContacts);
+
+    const handleDeleteItem = async (id) => {
+        await dispatch(deleteContact(id)).unwrap();
     };
 
-    const visibleContacts = useSelector(selectVisibleContacts);
     return (
-        <List>
-            {visibleContacts.map(({ id, name, number }, idx) => (
-                <ListItem key={id}>
-                    <span>{idx + 1}. {name}: {number} </span>
-                    <Button onClick={() => onDelete(id)}>delete</Button>
-                </ListItem>
+        <OrderedList>
+            {visibleContacts.map((item) => (
+                <ContactListItem key={item.id} item={item} onDelete={handleDeleteItem} />
             ))}
-        </List>
+        </OrderedList>
     );
 }
 
